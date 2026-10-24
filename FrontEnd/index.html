@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>QuickKart — Groceries Delivered in 10 Minutes</title>
+    <link rel="preconnect" href="https://fontawesome.com/">
+    <link href="style.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="logo">QuickKart</div>
+        <div class="location-btn">
+            <span>📍</span>
+            <span class="loc-text">Indiranagar, Bengaluru</span>
+            <span>▼</span>
+        </div>
+        <div class="eta-badge">
+            <span class="eta-dot"></span>
+            <span>⚡ 9-11 min delivery</span>
+        </div>
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search for milk, eggs, snacks..."
+                oninput="filterProducts()">
+        </div>
+        <div class="nav-actions">
+            <div class="account-btn">👤 Sign In</div>
+            <div class="cart-btn" onclick="openCartDrawer()">
+                🛒 Cart
+                <span class="cart-badge" id="cartCount">0</span>
+                <span class="cart-amount" id="cartAmount">₹0</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="category-nav" id="categoryNav"></nav>
+
+    <main class="container">
+        <div class="hero-grid" id="heroGrid">
+            <div class="hero-main">
+                <div class="hero-content">
+                    <div class="hero-tag">⚡ Lightning Fast</div>
+                    <h1>Groceries delivered<br>in <span style="color:#f97316;">10 minutes</span> flat</h1>
+                    <div class="hero-cta-btn">Shop now →</div>
+                </div>
+                <div class="hero-illustration"></div>
+            </div>
+            <div class="hero-card card-1">
+                <div><span class="card-badge orange">🔥 Today only</span></div>
+                <div>
+                    <div class="card-title">Fresh Dairy<br>up to 20% off</div>
+                    <div class="card-sub">Milk, cheese & butter</div>
+                </div>
+                <div class="card-icon">🧀</div>
+            </div>
+            <div class="hero-card card-2">
+                <div><span class="card-badge green">🌱 New arrivals</span></div>
+                <div>
+                    <div class="card-title">Organic Produce<br>Farm fresh</div>
+                    <div class="card-sub">Daily harvest</div>
+                </div>
+                <div class="card-icon">🥬</div>
+            </div>
+        </div>
+
+        <div class="theme-section" id="themeSection">
+            <h2>🎬 Curated for you</h2>
+            <div class="theme-subtitle">Handpicked collections based on your mood</div>
+            <div class="theme-grid" id="themeGrid"></div>
+        </div>
+
+        <div class="offers-section">
+            <div class="section-header">
+                <div>
+                    <h2>✨Exclusive offers</h2>
+                    <div class="section-sub">For you, right now</div>
+                </div>
+            </div>
+            <div class="offers-strip">
+                <div class="offer-card offer1"><span class="offer-icon">🎁</span>
+                    <div>
+                        <div class="offer-title">Free delivery</div>
+                        <div class="offer-desc">on first order</div>
+                    </div>
+                </div>
+                <div class="offer-card offer2"><span class="offer-icon">⚡</span>
+                    <div>
+                        <div class="offer-title">₹50 off</div>
+                        <div class="offer-desc">on ₹299+ | ZAPP50</div>
+                    </div>
+                </div>
+                <div class="offer-card offer3"><span class="offer-icon">🥛</span>
+                    <div>
+                        <div class="offer-title">20% off dairy</div>
+                        <div class="offer-desc">Today only</div>
+                    </div>
+                </div>
+                <div class="offer-card offer4"><span class="offer-icon">🍎</span>
+                    <div>
+                        <div class="offer-title">Buy 2 Get 1</div>
+                        <div class="offer-desc">Selected fruits</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="products-header">
+                <div>
+                    <h2 id="sectionTitle">All Products</h2>
+                    <div class="section-sub" id="productSubtitle">Fresh picks for you</div>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">QuickKart</div>
+            <div class="footer-links">
+                <a href="#">About</a><a href="#">Careers</a><a href="#">Partner</a><a href="#">Blog</a><a
+                    href="#">Help</a><a href="#">Privacy</a>
+            </div>
+            <div class="footer-copyright">© 2025 QuickKart • 10-minute delivery</div>
+        </div>
+    </footer>
+
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeCartDrawer()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>🛒 Your Cart</h3>
+            <div class="close-drawer" onclick="closeCartDrawer()">✕</div>
+        </div>
+        <div class="delivery-info">
+            <div class="delivery-icon">🛵</div>
+            <div class="delivery-text">
+                <strong>Delivery in ~9 minutes</strong>
+                <span>Dark store • 0.8 km away</span>
+            </div>
+        </div>
+        <div class="drawer-items" id="drawerItems"></div>
+        <div class="drawer-footer" id="drawerFooter" style="display:none">
+            <div class="bill-details">
+                <div class="bill-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+                <div class="bill-row"><span>Delivery fee</span><span style="color:#10b981;">FREE</span></div>
+                <div class="bill-row"><span>Service fee</span><span>₹5</span></div>
+                <div class="bill-row"><span>You save</span><span class="savings" id="savingsAmount">₹0</span></div>
+                <div class="bill-row total"><span>Total</span><span id="totalAmount">₹5</span></div>
+            </div>
+            <button class="checkout-button" onclick="checkout()"><span>Proceed to checkout</span><span>→</span></button>
+        </div>
+    </div>
+
+    <div class="toast-message" id="toastMsg"><span>✓</span><span id="toastText">Added to cart</span></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
